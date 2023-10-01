@@ -14,7 +14,6 @@ let options = {
 
 
 const url = config.MainURL+'/api/rest/blogs';
-//const url = config.MainURL+'/users';
 console.log(url);
 app.get("/",(request,response)=>{
     fetch(url,options)
@@ -36,7 +35,7 @@ app.get("/",(request,response)=>{
         let store = Long_Run();
         let longBlog = _.find(responseData, ({"title":store}));
 
-        //let search = responseData.filter(a=> _.values(a).some(b => b.includes("Privacy".title)))s
+        
         let search = (data, term) => data.find(({title}) => title.toLowerCase().includes(term.toLowerCase()))
 
         var results=_.filter(responseData,function(item){
@@ -53,8 +52,7 @@ app.get("/",(request,response)=>{
        }]
         response.send(mainData)
     })
-    //.then(ddataa=>response.send(ddataa.blogs[0]))
-    //response.send(response.json())
+    
 });
 
 

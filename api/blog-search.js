@@ -13,7 +13,6 @@ let options = {
 
 
 const url = config.MainURL+'/api/rest/blogs';
-//const url = config.MainURL+'/users';
 console.log(url);
 app.get("/:query",(request,response)=>{
     fetch(url,options)
