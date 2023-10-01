@@ -1,0 +1,5 @@
+{
+    "PORT": 5000,
+    //"MainURL":"https://jsonplaceholder.typicode.com"
+    "MainURL":"https://intent-kit-16.hasura.app"//https://jsonplaceholder.typicode.com
+}
