@@ -19,10 +19,10 @@ app.get("/:query",(request,response)=>{
     fetch(url,options)
     .then(res =>(res.json()))
     .then(ddataa=>{
-        const username = request.params.query; 
+        const userInput = request.params.query; 
         let responseData = ddataa.blogs;
           var results=_.filter(responseData,function(item){
-            return (item.title).toLowerCase().indexOf(username.toLowerCase())>-1;
+            return (item.title).toLowerCase().indexOf(userInput.toLowerCase())>-1;
             });
 
         
