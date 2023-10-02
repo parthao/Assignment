@@ -20,7 +20,7 @@ app.get("/",(request,response)=>{
    
     .then(res =>(res.json()))
     .catch(error=>{
-        console.log(error);
+        response.send(error)
     })
     .then(ddataa=>{
        

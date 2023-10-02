@@ -3,6 +3,12 @@ const app = express.Router();
 const config =require('config')
 const _ = require("lodash");
 
+
+
+
+const url = config.MainURL+'/api/rest/blogs';
+let recivedData
+
 let options = {
    
     headers: { 
@@ -11,22 +17,46 @@ let options = {
 }
 }
 
-const url = config.MainURL+'/api/rest/blogs';
-console.log(url);
-app.get("/:query",(request,response)=>{
+var myFetch = (input) =>
+{
     fetch(url,options)
     .then(res =>(res.json()))
     .catch(error=>{
         console.log(error)
     })
     .then(ddataa=>{
-        const userInput = request.params.query; 
         let responseData = ddataa.blogs;
-          var results=_.filter(responseData,function(item){
-            return (item.title).toLowerCase().indexOf(userInput.toLowerCase())>-1;
+
+        var results=_.filter(responseData,function(item){
+            return (item.title).toLowerCase().indexOf(input.toLowerCase())>-1;
             });
-        response.send(results)
+
+            recivedData=results
+        return results;
     })
+
+}
+
+var chachMemory = _.memoize(function(result) {
+    myFetch(result)
+    return myFetch(result)
+});
+
+//var result = chachMemory(userInput);
+console.log(url);
+app.get("/:query",(request,response)=>{
+
+    const userInput = request.params.query;
+    myFetch(userInput);
+    
+    chachMemory(userInput)
+
+    ///console.log(myFetch(userInput))
+    console.log(chachMemory.cache)
+   // var result = chachMemory(userInput);
+    response.send(recivedData);
+   //myCache(userInput);
+   
 });
 
 

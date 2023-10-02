@@ -3,7 +3,7 @@ const config =require('config')
 const app = express()
 const mainRoute = require('./api/blog-stats')
 const searchRoute = require('./api/blog-search')
-const NotFound = require('./api/blog-search')
+const NotFound = require('./api/not-found')
 
 app.use(express.json());
 app.use((request, response, next)=>{
