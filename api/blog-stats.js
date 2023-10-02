@@ -19,6 +19,9 @@ app.get("/",(request,response)=>{
     fetch(url,options)
    
     .then(res =>(res.json()))
+    .catch(error=>{
+        console.log(error);
+    })
     .then(ddataa=>{
        
         let responseData = ddataa.blogs;
@@ -36,7 +39,7 @@ app.get("/",(request,response)=>{
         let longBlog = _.find(responseData, ({"title":store}));
 
         
-        let search = (data, term) => data.find(({title}) => title.toLowerCase().includes(term.toLowerCase()))
+        //let search = (data, term) => data.find(({title}) => title.toLowerCase().includes(term.toLowerCase()))
 
         var results=_.filter(responseData,function(item){
             return (item.title).toLowerCase().indexOf("Privacy".toLowerCase())>-1;
@@ -53,21 +56,9 @@ app.get("/",(request,response)=>{
         response.send(mainData)
     })
     
+    
 });
 
 
-app.post("/",(request,response)=>{
-    response.send("Sample POST is called.")
-});
-
-
-app.put("/",(request,response)=>{
-    response.send("Sample PUT is called.")
-});
-
-
-app.delete("/",(request,response)=>{
-    response.send("Sample DELETE is called.")
-});
 
 module.exports = app;

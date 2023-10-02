@@ -11,37 +11,23 @@ let options = {
 }
 }
 
-
 const url = config.MainURL+'/api/rest/blogs';
 console.log(url);
 app.get("/:query",(request,response)=>{
     fetch(url,options)
     .then(res =>(res.json()))
+    .catch(error=>{
+        console.log(error)
+    })
     .then(ddataa=>{
         const userInput = request.params.query; 
         let responseData = ddataa.blogs;
           var results=_.filter(responseData,function(item){
             return (item.title).toLowerCase().indexOf(userInput.toLowerCase())>-1;
             });
-
-        
         response.send(results)
     })
 });
 
-
-app.post("/",(request,response)=>{
-    response.send("Sample POST is called.")
-});
-
-
-app.put("/",(request,response)=>{
-    response.send("Sample PUT is called.")
-});
-
-
-app.delete("/",(request,response)=>{
-    response.send("Sample DELETE is called.")
-});
 
 module.exports = app;

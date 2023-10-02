@@ -3,6 +3,7 @@ const config =require('config')
 const app = express()
 const mainRoute = require('./api/blog-stats')
 const searchRoute = require('./api/blog-search')
+const NotFound = require('./api/blog-search')
 
 app.use(express.json());
 app.use((request, response, next)=>{
@@ -15,6 +16,9 @@ app.use((request, response, next)=>{
 app.use('/api/blog-stats',mainRoute)
 
 app.use('/api/blog-search',searchRoute)
+
+app.use('/*',NotFound)
+
 
 app.listen(config.PORT, () => {
     console.log(`Node server listening on port : http://localhost:${config.PORT}`)
