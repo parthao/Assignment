@@ -38,7 +38,7 @@ var myFetch = (input) =>
 }
 
 var chachMemory = _.memoize(function(result) {
-    myFetch(result)
+    console.log(myFetch(result))
     return myFetch(result)
 });
 
